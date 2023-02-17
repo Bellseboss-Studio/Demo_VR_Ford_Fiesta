@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Bellseboss/Scenes/Configuration.unity
+    guid: 9b936777a186886419f14a10936bdafa
+  - enabled: 1
+    path: Assets/Bellseboss/Scenes/Taller.unity
+    guid: bde9b5bb86ff1844898851b0a9656216
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bd8bb930f5aa15a47a0092a7a7f6753b,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: d611a55c43c5ceb4ba48288ae05f790e,
+      type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 5e4978c4bd307964b8c56798ba6ccc30,
+      type: 2}
