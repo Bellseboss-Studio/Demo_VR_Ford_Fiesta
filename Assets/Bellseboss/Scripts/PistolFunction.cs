@@ -23,10 +23,4 @@ public class PistolFunction : MonoBehaviour
             Destroy(bulletSpawn, 10);
         });
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

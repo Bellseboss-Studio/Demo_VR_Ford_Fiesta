@@ -6,12 +6,10 @@ public class EstationOfCustomCarFacade : MonoBehaviour
     public void NextRingOfCar()
     {
         ring.Next();
-        Debug.Log("NextRingOfCar");
     }
     public void PreviousRingOfCar()
     {
         ring.Previous();
-        Debug.Log("PreviousRingOfCar");
     }
     public void NextColorOfCar()
     {
