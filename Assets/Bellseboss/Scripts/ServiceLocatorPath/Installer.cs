@@ -12,6 +12,6 @@ public class Installer : MonoBehaviour
         }
         ServiceLocator.Instance.RegisterService<IDebugMediator>(debugMediator);
         DontDestroyOnLoad(gameObject);
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = 60;
     }
 }
