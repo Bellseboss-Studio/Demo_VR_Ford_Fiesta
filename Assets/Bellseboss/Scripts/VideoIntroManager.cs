@@ -7,7 +7,6 @@ using UnityEngine.Video;
 public class VideoIntroManager : MonoBehaviour
 {
     [SerializeField] private VideoPlayer videoPlayer;
-    [SerializeField] private SceneTransitionManager sceneManager;
 
     private void Start()
     {
@@ -17,6 +16,6 @@ public class VideoIntroManager : MonoBehaviour
     private IEnumerator FinishingVideo()
     {
         yield return new WaitForSeconds((float) videoPlayer.clip.length + 1);
-        sceneManager.GoToScene(1);
+        ServiceLocator.Instance.GetService<ISceneTransition>().GoScene(1);
     }
 }

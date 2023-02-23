@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 7830058586278046097}
   - component: {fileID: 7830058586278046096}
   m_Layer: 7
-  m_Name: TallerDeMecanica
+  m_Name: Teleport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

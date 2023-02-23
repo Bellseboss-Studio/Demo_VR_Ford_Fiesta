@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Installer : MonoBehaviour
 {
-    [SerializeField] private DebugMediator debugMediator;
+    [SerializeField] private SceneTransitionManager transitionManager;
     private void Awake()
     {
         if (FindObjectsOfType<Installer>().Length > 1)
@@ -10,7 +10,7 @@ public class Installer : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        ServiceLocator.Instance.RegisterService<IDebugMediator>(debugMediator);
+        ServiceLocator.Instance.RegisterService<ISceneTransition>(transitionManager);
         DontDestroyOnLoad(gameObject);
         Application.targetFrameRate = 60;
     }

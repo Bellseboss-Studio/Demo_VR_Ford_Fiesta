@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbable: {fileID: 1642701379}
-  collision: {fileID: 0}
+  collision: {fileID: 2579512675474559306}
   m_DrillStarted: {fileID: 11400000, guid: 193777a7db08e44f0847b4454dc4ca8e, type: 2}
   m_DrillStopped: {fileID: 11400000, guid: c810f642f48ef4831ae0692b99bfe846, type: 2}
 --- !u!1 &4511655667520406309

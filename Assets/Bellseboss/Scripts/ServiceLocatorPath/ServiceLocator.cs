@@ -33,4 +33,9 @@ public class ServiceLocator
 
         return (T) service;
     }
+
+    public void RemoveService(Type service)
+    {
+        _services.Remove(service);
+    }
 }
