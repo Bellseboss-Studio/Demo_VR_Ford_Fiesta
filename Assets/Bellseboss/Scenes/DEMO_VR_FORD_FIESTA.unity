@@ -8203,10 +8203,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 125655967, guid: f5c336ce99fb442318ade596909d9aea, type: 3}
-      propertyPath: m_InteractionLayers.m_Bits
-      value: 16
-      objectReference: {fileID: 0}
     - target: {fileID: 8314127936638418199, guid: f5c336ce99fb442318ade596909d9aea,
         type: 3}
       propertyPath: m_RootOrder
