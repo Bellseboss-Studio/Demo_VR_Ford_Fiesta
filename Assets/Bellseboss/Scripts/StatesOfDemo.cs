@@ -78,4 +78,9 @@ public class StatesOfDemo : MonoBehaviour, IStateOfDemo, IBeggingState, IWaiting
     {
         return waiting;
     }
+
+    public void ShowOptionsInBegging()
+    {
+        audioIntro.ShowAllIcons();
+    }
 }

@@ -15,7 +15,7 @@ public class AudioIntro : MonoBehaviour
         ShowAllIcons();
     }
 
-    private void ShowAllIcons()
+    public void ShowAllIcons()
     {
         SetStateOfIcons(true);
     }
@@ -78,7 +78,7 @@ public class AudioIntro : MonoBehaviour
     {
         _finishedToPlay = false;
         audioSource.Play();
-        yield return new WaitForSeconds(audioSource.clip.length + 1);
+        yield return new WaitForSeconds(audioSource.clip.length);
         _finishedToPlay = true;
     }
 
