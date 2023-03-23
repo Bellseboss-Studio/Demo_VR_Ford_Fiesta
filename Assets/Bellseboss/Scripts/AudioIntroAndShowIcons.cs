@@ -20,11 +20,7 @@
                 _mediator.GetAudioIntro().HideTeleportsToEnvironment();
                 ServiceLocator.Instance.GetService<IDebugMediator>().LogL("Start intro");
             })
-            .Wait(() =>
-            {
-                ServiceLocator.Instance.GetService<IDebugMediator>().LogR($"audio finished {_mediator.GetAudioIntro().HasAudioFinished()}");
-                return _mediator.GetAudioIntro().HasAudioFinished();
-            }, 0.1f)
+            .Wait(() => _mediator.GetAudioIntro().HasAudioFinished(), 0.5f)
             .Add(() =>
             {
                 ServiceLocator.Instance.GetService<IDebugMediator>().LogL("Start Car Custom");

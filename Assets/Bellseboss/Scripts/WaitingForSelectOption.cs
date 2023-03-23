@@ -9,11 +9,22 @@
 
     protected override void CreateState()
     {
-        _state.Pause().Wait(() => _mediator.GetWaitingMono().HasSelectedAnything(), 0.1f);
+        _state.Pause()
+            .Add(() =>
+            {
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Start Waiting");
+                _mediator.ShowButtonToUi();
+            })
+            .Wait(() => _mediator.GetWaitingMono().HasSelectedAnything(), 0.1f);
     }
     
     public int Selection()
     {
         return _mediator.GetWaitingMono().GetOption();
+    }
+
+    public void SetSelection(int newOption)
+    {
+        _mediator.GetWaitingMono().SetOption(newOption);
     }
 }

@@ -14,6 +14,8 @@ public class StatesOfDemo : MonoBehaviour, IStateOfDemo, IBeggingState, IWaiting
     private AudioIntroAndShowIcons _audio;
     private WaitingForSelectOption _waiting;
     private CarCustomization _customCar;
+
+    private TeaTime _waitingTea;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,7 @@ public class StatesOfDemo : MonoBehaviour, IStateOfDemo, IBeggingState, IWaiting
         _customCar = new CarCustomization(this);
 
         _audio.GetTeaTime().Add(_waiting.GetTeaTime().Play());
-        _waiting.GetTeaTime().Add(() =>
+        _waitingTea = _waiting.GetTeaTime().Add(() =>
         {
             switch (_waiting.Selection())
             {
@@ -79,8 +81,15 @@ public class StatesOfDemo : MonoBehaviour, IStateOfDemo, IBeggingState, IWaiting
         return waiting;
     }
 
-    public void ShowOptionsInBegging()
+    public void ShowButtonToUi()
     {
         audioIntro.ShowAllIcons();
+    }
+
+    public void ShowOptionsInBegging()
+    {
+        ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"ResetAllComponents");
+        _waiting.SetSelection(0);
+        _waitingTea.Restart();
     }
 }

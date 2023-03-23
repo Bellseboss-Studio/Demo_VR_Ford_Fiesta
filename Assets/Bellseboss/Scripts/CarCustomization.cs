@@ -24,7 +24,6 @@
             .Add(() =>
             {
                 //Reset all position
-                _mediator.HideOptionsToDoing();
                 _mediator.GetCarCustomMono().HidePointToTeleport();
                 _mediator.ShowTeleportToGoToBegging();
                 _mediator.GetCarCustomMono().DisablePanelAndMechanics();

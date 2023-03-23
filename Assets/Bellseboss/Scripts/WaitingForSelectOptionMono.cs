@@ -10,6 +10,7 @@ public class WaitingForSelectOptionMono : MonoBehaviour
 
     public void SetOption(int option)
     {
+        ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"SetOption {option}");
         _option = option;
     }
 

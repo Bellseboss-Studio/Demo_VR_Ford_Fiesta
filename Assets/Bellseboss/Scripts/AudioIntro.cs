@@ -29,15 +29,8 @@ public class AudioIntro : MonoBehaviour
 
     public bool HasAudioFinished()
     {
-        if (_finishedToPlay)
-        {
-            _finishedToPlay = false;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        //ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"audioSource.isPlaying {audioSource.isPlaying}");
+        return _finishedToPlay;
     }
 
     public void StartOptionCarCustomization()
@@ -76,9 +69,12 @@ public class AudioIntro : MonoBehaviour
 
     private IEnumerator PlaySound()
     {
-        _finishedToPlay = false;
         audioSource.Play();
-        yield return new WaitForSeconds(audioSource.clip.length);
+        _finishedToPlay = false;
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
         _finishedToPlay = true;
     }
 
