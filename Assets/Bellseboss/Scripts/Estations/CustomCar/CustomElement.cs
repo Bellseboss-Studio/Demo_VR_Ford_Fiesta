@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CustomElement : MonoBehaviour
+public abstract class CustomElement : MonoBehaviour
 {
-    [SerializeField] private GameObject[] listOfParts;
-    [SerializeField] private Transform[] pointToChangeElement;
-    private List<GameObject> elementConcurrent;
-    private int internalIndex;
+    protected int internalIndex;
 
-    private void Start()
+    protected virtual void Start()
     {
-        elementConcurrent = new List<GameObject>();
         ChangeElement();
     }
 
     public void Next()
     {
+        ServiceLocator.Instance.GetService<IDebugMediator>().LogR($"press button to next");
         internalIndex++;
-        if (internalIndex > listOfParts.Length -1)
+        if (internalIndex > GetLengthOfList() -1)
         {
             internalIndex = 0;
         }
@@ -27,29 +22,16 @@ public class CustomElement : MonoBehaviour
 
     public void Previous()
     {
+        ServiceLocator.Instance.GetService<IDebugMediator>().LogR($"press button to next");
         internalIndex--;
         if (internalIndex < 0)
         {
-            internalIndex = listOfParts.Length - 1;
+            internalIndex = GetLengthOfList() - 1;
         }
         ChangeElement();
     }
 
-    private void ChangeElement()
-    {
-        foreach (var o in elementConcurrent)
-        {
-            Destroy(o);   
-        }
-
-        elementConcurrent = new List<GameObject>();
-        
-        foreach (var point in pointToChangeElement)
-        {
-            var elementConcurrentNew = Instantiate(listOfParts[internalIndex], point);
-            elementConcurrentNew.transform.position = point.position;
-            elementConcurrent.Add(elementConcurrentNew);
-        }
-        
-    }
+    protected abstract void ChangeElement();
+    
+    protected abstract int GetLengthOfList();
 }
