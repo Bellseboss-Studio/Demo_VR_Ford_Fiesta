@@ -8,6 +8,7 @@ public class DebugAdapter : MonoBehaviour, IDebug
 {
     [SerializeField] private TextMeshProUGUI textUi;
     [SerializeField] private GameObject father;
+    [SerializeField] private int countOfLines;
     private Queue<string> log;
     private bool _isEnable;
 
@@ -32,7 +33,7 @@ public class DebugAdapter : MonoBehaviour, IDebug
     {
         Debug.Log(text);
         log.Enqueue(text);
-        if (log.Count > 5)
+        if (log.Count > countOfLines)
         {
             log.Dequeue();
         }

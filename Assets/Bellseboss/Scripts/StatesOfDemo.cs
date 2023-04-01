@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StatesOfDemo : MonoBehaviour, IStateOfDemo, IBeggingState, IWaitingForSelectionOfOption, ICarCustomization
+public class StatesOfDemo : MonoBehaviour, IBeggingState, IWaitingForSelectionOfOption, ICarCustomization
 {
     [SerializeField] private AudioIntro audioIntro;
 
@@ -9,39 +9,127 @@ public class StatesOfDemo : MonoBehaviour, IStateOfDemo, IBeggingState, IWaiting
     [SerializeField] private CarCustomMono carCustom;
 
     [SerializeField] private GameObject teleportToGoToBegging;
+
+    private TeaTime _intro, _waitingForChoice, _customizationCar, _experienceOfDriving, _workshopOfChangeTire;
     
-    private TeaTime _firstPart, _secondPart, _optionCustom;
-    private AudioIntroAndShowIcons _audio;
-    private WaitingForSelectOption _waiting;
-    private CarCustomization _customCar;
-    // Start is called before the first frame update
     void Start()
     {
-        _audio = new AudioIntroAndShowIcons(this);
-        _waiting = new WaitingForSelectOption(this);
-        _customCar = new CarCustomization(this);
 
-        _audio.GetTeaTime().Add(_waiting.GetTeaTime().Play());
-        _waiting.GetTeaTime().Add(() =>
-        {
-            switch (_waiting.Selection())
+        _intro = this.tt().Pause().Add(() =>
             {
-                case 1:
-                    _customCar.GetTeaTime().Play();
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                default:
-                    break;
-            }
-        });
-        
-        
-        
-        _audio.GetTeaTime().Play();
+                //Sound Play in audio of begin
+                GetAudioIntro().StartAudio();
+                GetAudioIntro().HideTeleportsToEnvironment();
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogL("Start intro");
+            })
+            .Wait(() => GetAudioIntro().HasAudioFinished(), 0.5f)
+            .Add(() =>
+            {
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogL("Start Car Custom");
+                //Play sound the second audio
+                GetAudioIntro().StartOptionCarCustomization();
+                //activate animation to show the icon
+                GetAudioIntro().StartAnimationCarCustomization();
+                //first icon
+            })
+            .Wait(() => GetAudioIntro().HasAudioFinished(), 0.1f)
+            .Add(() =>
+            {
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogL("Start Driver experience");
+                //Play sound the third audio
+                GetAudioIntro().StartOptionDriverExperience();
+                //activate animation to show the icon
+                GetAudioIntro().StartAnimationDriverExperience();
+                //second icon
+            })
+            .Wait(() => GetAudioIntro().HasAudioFinished(), 0.1f)
+            .Add(() =>
+            {
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogL("Start Doing mechanic");
+                //Play sound the fourth audio
+                GetAudioIntro().StartOptionDoingMechanic();
+                //activate animation to show the icon
+                GetAudioIntro().StartAnimationDoingMechanic();
+                //third icon
+            })
+            .Wait(() => GetAudioIntro().HasAudioFinished(), 0.1f)
+            .Add(() => _waitingForChoice.Play());
 
+        _waitingForChoice = this.tt().Pause()
+            .Add(() =>
+            {
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Start Waiting");
+                ShowButtonToUi();
+                waiting.SetOption(0);
+            })
+            .Wait(() => GetWaitingMono().HasSelectedAnything(), 0.1f).Add(() =>
+            {
+                switch (GetWaitingMono().GetOption())
+                {
+                    case 1:
+                        _customizationCar.Play();
+                        break;
+                    case 2:
+                        _experienceOfDriving.Play();
+                        break;
+                    case 3:
+                        _workshopOfChangeTire.Play();
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+        _customizationCar = this.tt().Pause()
+            .Add(() =>
+            {
+                HideOptionsToDoing();
+                HideTeleportToGoToBegging();
+                GetCarCustomMono().ShowPointToTeleport();
+            })
+            .Add(() =>
+            {
+                GetCarCustomMono().EnablePanelAndMechanics();
+                GetCarCustomMono().StartExplanationInAudio();
+            }).Wait(() => GetCarCustomMono().WannaGoingToOtherPlace(), 0.1f)
+            .Add(() =>
+            {
+                //Reset all position
+                GetCarCustomMono().HidePointToTeleport();
+                ShowTeleportToGoToBegging();
+                GetCarCustomMono().DisablePanelAndMechanics();
+            })
+            .Add(() => _waitingForChoice.Play());
+
+        _experienceOfDriving = this.tt().Pause()
+            .Add(() =>
+            {
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Enable teleport");
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Disable panel");
+            }).Wait(()=>true,20)
+            .Add(() =>
+            {
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Finished experience");
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Enable teleport to the begging");
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Disable teleport in driving experience");
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Set option to 0");
+            })
+            .Add(() => _waitingForChoice.Play());
+
+        _workshopOfChangeTire = this.tt().Pause()
+            .Add(() =>
+            {
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"enable teleport in table");
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"show what is the next action");
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Wait for take the gunHidraulic");
+            }).Wait(()=>true,10)
+            .Add(() =>
+            {
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Show whats is the next action");
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Mark the tire and tornillo and waiting to start the hidraulic gun");
+            })
+            .Add(() => _waitingForChoice.Play());
+        _intro.Play();
     }
 
     public TeaTime GetTeaTime()
@@ -79,8 +167,15 @@ public class StatesOfDemo : MonoBehaviour, IStateOfDemo, IBeggingState, IWaiting
         return waiting;
     }
 
-    public void ShowOptionsInBegging()
+    public void ShowButtonToUi()
     {
         audioIntro.ShowAllIcons();
+    }
+
+    public void ShowOptionsInBegging()
+    {
+        ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"ResetAllComponents");
+        GetWaitingMono().SetOption(0);
+        _waitingForChoice.Restart();
     }
 }
