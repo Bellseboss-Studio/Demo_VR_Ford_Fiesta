@@ -41,12 +41,10 @@ public class PistolHidraulic : MonoBehaviour
         {
             control = null;
             _useImpulse = false;
-            //Drill Release
-            ServiceLocator.Instance.GetService<IDebugMediator>().LogR("Disable RUN");
+       
             if (m_DrillStopped != null)
             {
                 m_DrillStopped.Occurred();
-                ServiceLocator.Instance.GetService<IDebugMediator>().LogR("Stop");
             }
             if (collision.StayInPosition())
             {

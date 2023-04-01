@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,22 +7,21 @@ namespace Bellseboss.Audio.Scripts
     [Serializable]
     public class EventListener : MonoBehaviour
     {
-        public Event GameEvent;
-        public UnityEvent response;
+        [SerializeField] private Event m_GameEvent;
+        [SerializeField] private UnityEvent m_Response;
 
         private void OnEnable()
         {
-            GameEvent.Register(this);
+            m_GameEvent.Register(this);
         }
 
         public void OnDisable()
         {
-            GameEvent.Unregister(this);
+            m_GameEvent.Unregister(this);
         }
         public void OnEventOccurs()
         {
-            response.Invoke();
+            m_Response.Invoke();
         }
-        
     }
 }
