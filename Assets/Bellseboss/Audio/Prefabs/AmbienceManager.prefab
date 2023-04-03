@@ -115,7 +115,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 5260807096226803396}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: set_isStatic
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
