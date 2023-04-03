@@ -1,12 +1,14 @@
 using UnityEngine;
 
-public class StatesOfDemo : MonoBehaviour, IBeggingState, IWaitingForSelectionOfOption, ICarCustomization
+public class StatesOfDemo : MonoBehaviour
 {
     [SerializeField] private AudioIntro audioIntro;
 
     [SerializeField] private WaitingForSelectOptionMono waiting;
 
     [SerializeField] private CarCustomMono carCustom;
+
+    [SerializeField] private ExperienceOfDriving experience;
 
     [SerializeField] private GameObject teleportToGoToBegging;
 
@@ -104,15 +106,25 @@ public class StatesOfDemo : MonoBehaviour, IBeggingState, IWaitingForSelectionOf
         _experienceOfDriving = this.tt().Pause()
             .Add(() =>
             {
-                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Enable teleport");
-                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Disable panel");
-            }).Wait(()=>true,20)
+                experience.EnableTeleportInDoor();
+                audioIntro.HideAllIcons();
+                HideTeleportToGoToBegging();
+            }).Wait(()=>experience.HasTeleportInDoor(),0.5f)
             .Add(() =>
             {
-                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Finished experience");
-                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Enable teleport to the begging");
-                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Disable teleport in driving experience");
-                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Set option to 0");
+                //Enable teleport into car
+                experience.EnableTeleportIntoCar();
+            })
+            .Wait(()=>experience.StayIntoCar(),0.1f)
+            .Add(() =>
+            {
+                //Stay into car
+                experience.EnableTeleportOutCar();
+            })
+            .Wait(()=>!experience.StayIntoCar(),0.5f)
+            .Add(() =>
+            {
+                teleportToGoToBegging.SetActive(true);
             })
             .Add(() => _waitingForChoice.Play());
 

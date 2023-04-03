@@ -123,6 +123,104 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &12596707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 12596708}
+  - component: {fileID: 12596711}
+  - component: {fileID: 12596710}
+  - component: {fileID: 12596709}
+  m_Layer: 7
+  m_Name: Cylinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &12596708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12596707}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 569193398}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &12596709
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12596707}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!23 &12596710
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12596707}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 10d7e9328b4fe13478e5216667d491f1, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &12596711
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12596707}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &22955157
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -954,7 +1052,7 @@ GameObject:
   - component: {fileID: 117432724}
   - component: {fileID: 117432723}
   - component: {fileID: 117432722}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -970,7 +1068,7 @@ MeshCollider:
   m_GameObject: {fileID: 117432721}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -2256,7 +2354,7 @@ GameObject:
   - component: {fileID: 367248492}
   - component: {fileID: 367248493}
   m_Layer: 7
-  m_Name: ExperienciaDeConduccionTeleport (1)
+  m_Name: ExperienciaDeConduccionTeleportIn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2369,10 +2467,22 @@ MonoBehaviour:
   m_Teleporting:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 728196942}
-        m_TargetAssemblyTypeName: TeleportIntoCar, Assembly-CSharp
-        m_MethodName: OnTeleportOut
-        m_Mode: 0
+      - m_Target: {fileID: 1368501641}
+        m_TargetAssemblyTypeName: ExperienceOfDriving, Assembly-CSharp
+        m_MethodName: SetIfStayInTeleportInDoor
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 367248491}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3038,6 +3148,7 @@ GameObject:
   - component: {fileID: 525700864}
   - component: {fileID: 525700863}
   - component: {fileID: 525700862}
+  - component: {fileID: 525700865}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -3123,6 +3234,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525700860}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &525700865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525700860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd1e7c8af6a4628bd480da31428df67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &527114856
 GameObject:
   m_ObjectHideFlags: 0
@@ -4283,6 +4406,143 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &569193397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 569193398}
+  - component: {fileID: 569193399}
+  m_Layer: 7
+  m_Name: ExperienciaDeConduccionTeleportOut
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &569193398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569193397}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.32702002, y: 1.0022726, z: 0.009343359}
+  m_LocalScale: {x: 0.2525252, y: 0.2525252, z: 0.2525252}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 12596708}
+  m_Father: {fileID: 1843325748}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &569193399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569193397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e2f4617667341945b5a7756e14b62d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_InteractionManager: {fileID: 0}
+  m_Colliders:
+  - {fileID: 12596709}
+  m_InteractionLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 2
+  m_DistanceCalculationMode: 0
+  m_SelectMode: 1
+  m_CustomReticle: {fileID: 0}
+  m_FirstHoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastHoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_HoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_SelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_SelectExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Activated:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Deactivated:
+    m_PersistentCalls:
+      m_Calls: []
+  m_StartingHoverFilters: []
+  m_StartingSelectFilters: []
+  m_OnFirstHoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnLastHoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectCanceled:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_TeleportationProvider: {fileID: 0}
+  m_MatchOrientation: 0
+  m_MatchDirectionalInput: 0
+  m_TeleportTrigger: 0
+  m_FilterSelectionByHitNormal: 0
+  m_UpNormalToleranceDegrees: 30
+  m_Teleporting:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1368501641}
+        m_TargetAssemblyTypeName: ExperienceOfDriving, Assembly-CSharp
+        m_MethodName: GoOutOfCar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_TeleportAnchorTransform: {fileID: 569193398}
 --- !u!1 &577138470
 GameObject:
   m_ObjectHideFlags: 0
@@ -4295,6 +4555,7 @@ GameObject:
   - component: {fileID: 577138474}
   - component: {fileID: 577138473}
   - component: {fileID: 577138472}
+  - component: {fileID: 577138475}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -4380,6 +4641,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577138470}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &577138475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577138470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd1e7c8af6a4628bd480da31428df67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &584569795
 GameObject:
   m_ObjectHideFlags: 0
@@ -4924,19 +5197,7 @@ MonoBehaviour:
       m_Calls: []
   m_Activated:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 728196942}
-        m_TargetAssemblyTypeName: TeleportIntoCar, Assembly-CSharp
-        m_MethodName: OnActivate
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Deactivated:
     m_PersistentCalls:
       m_Calls: []
@@ -4990,6 +5251,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1368501641}
+        m_TargetAssemblyTypeName: ExperienceOfDriving, Assembly-CSharp
+        m_MethodName: TeleportIntoCar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_TeleportAnchorTransform: {fileID: 728196940}
 --- !u!114 &728196942
 MonoBehaviour:
@@ -5006,11 +5279,8 @@ MonoBehaviour:
   player: {fileID: 1630531511}
   parentTarget: {fileID: 1843325747}
   objectsToActivate:
-  - {fileID: 1768632867}
   - {fileID: 319846461}
-  objectsToDisable:
-  - {fileID: 1655435165}
-  - {fileID: 5733447430119105680}
+  objectsToDisable: []
 --- !u!1 &753629453
 GameObject:
   m_ObjectHideFlags: 0
@@ -5546,7 +5816,7 @@ PrefabInstance:
     - target: {fileID: 4306166527320240392, guid: 810d4612fca1d2e48801da7774d99207,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4306166527320240392, guid: 810d4612fca1d2e48801da7774d99207,
         type: 3}
@@ -7821,6 +8091,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1368501640}
+  - component: {fileID: 1368501641}
   m_Layer: 0
   m_Name: StationOfExpepriencieOfDriver
   m_TagString: Untagged
@@ -7844,6 +8115,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1368501641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368501639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92af340d3c5410ca58f385271e986ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teleportInDoor: {fileID: 367248491}
+  teleportIntoCar: {fileID: 1655435165}
+  teleportOutOfCar: {fileID: 569193397}
+  wheelFake: {fileID: 5733447430119105680}
+  wheelTruth: {fileID: 1768632867}
 --- !u!1 &1385419383
 GameObject:
   m_ObjectHideFlags: 0
@@ -8362,7 +8650,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29684
+  m_Name: pb_Mesh30804
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8869,7 +9157,7 @@ GameObject:
   - component: {fileID: 1625246090}
   - component: {fileID: 1625246091}
   m_Layer: 0
-  m_Name: Rules
+  m_Name: Logic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8905,6 +9193,7 @@ MonoBehaviour:
   audioIntro: {fileID: 1664723329}
   waiting: {fileID: 819071820}
   carCustom: {fileID: 1175476259}
+  experience: {fileID: 1368501641}
   teleportToGoToBegging: {fileID: 1986136044}
 --- !u!1001 &1630531510
 PrefabInstance:
@@ -9194,7 +9483,7 @@ GameObject:
   - component: {fileID: 1655435167}
   - component: {fileID: 1655435166}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: ColliderToTeleportIntoCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10669,7 +10958,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1768632868
 Transform:
   m_ObjectHideFlags: 0
@@ -10915,7 +11204,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768632867}
-  m_Mesh: {fileID: -3705831265646782135, guid: 912b3ea4bcff32e42bd115902f020ed6, type: 3}
+  m_Mesh: {fileID: -3705831265646782135, guid: 00422f42d3aa82e41aa46478d697f1cf, type: 3}
 --- !u!1 &1798227991
 GameObject:
   m_ObjectHideFlags: 0
@@ -11130,7 +11419,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1843325748}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1807070767
 MeshRenderer:
@@ -11775,7 +12064,6 @@ GameObject:
   - component: {fileID: 1843325748}
   - component: {fileID: 1843325752}
   - component: {fileID: 1843325751}
-  - component: {fileID: 1843325750}
   - component: {fileID: 1843325749}
   m_Layer: 0
   m_Name: Cylinder
@@ -11800,6 +12088,7 @@ Transform:
   - {fileID: 1655435169}
   - {fileID: 944010385}
   - {fileID: 367248492}
+  - {fileID: 569193398}
   - {fileID: 879353012}
   - {fileID: 543450652510667311}
   - {fileID: 1807070766}
@@ -11819,20 +12108,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cylinder: {fileID: 1843325747}
---- !u!136 &1843325750
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1843325747}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &1843325751
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13944,7 +14219,7 @@ PrefabInstance:
     - target: {fileID: 5196016468121773728, guid: 5433e53fa6d9e2c4f85633bd20647ad9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5196016468121773728, guid: 5433e53fa6d9e2c4f85633bd20647ad9,
         type: 3}
@@ -14063,6 +14338,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5949855463424209377, guid: 5433e53fa6d9e2c4f85633bd20647ad9,
         type: 3}
+      propertyPath: m_Name
+      value: volante.002-fake
+      objectReference: {fileID: 0}
+    - target: {fileID: 5949855463424209377, guid: 5433e53fa6d9e2c4f85633bd20647ad9,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -14076,6 +14356,12 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5c991b905408e944ca9432657b1f2c6f, type: 2}
+    - target: {fileID: 7789731242569450261, guid: 5433e53fa6d9e2c4f85633bd20647ad9,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -3705831265646782135, guid: 00422f42d3aa82e41aa46478d697f1cf,
+        type: 3}
     - target: {fileID: 7836838566432561916, guid: 5433e53fa6d9e2c4f85633bd20647ad9,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
