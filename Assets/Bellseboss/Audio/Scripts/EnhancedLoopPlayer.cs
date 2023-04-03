@@ -7,7 +7,7 @@ using UnityEngine.Audio;
 namespace Audio.Scripts
 {
 	[RequireComponent(typeof(AudioSource))]
-	public class AmbienceSoundPlayer : MonoBehaviour
+	public class EnhancedLoopPlayer : MonoBehaviour
 	{
 		[SerializeField] private bool m_UseSoundCollection = false;
 		private bool m_UseCorroutine = false;
