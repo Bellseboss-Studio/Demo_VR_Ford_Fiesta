@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8b0d37d0aece442b8585ee66701b3ec, type: 3}
+  m_Name: RandomWorkshopSounds_ClipCollection;
+  m_EditorClassIdentifier: 
+  m_SoundCollection:
+  - {fileID: 8300000, guid: 5c7b8c1b49fe0467bb74b5577b880122, type: 3}
+  - {fileID: 8300000, guid: 1d2ed8b01832d485c949d1799fc2f1fc, type: 3}
+  - {fileID: 8300000, guid: 6b01a09a1f5264ce68b968455d571adc, type: 3}
+  - {fileID: 8300000, guid: 44db88eb187464f33bd8c14e5bc9e001, type: 3}
+  - {fileID: 8300000, guid: fa99f5077cf474386acc1e65dfceff61, type: 3}
+  - {fileID: 8300000, guid: 97b47ea15f72844c7969d3595dc94698, type: 3}
+  - {fileID: 8300000, guid: 1f4029e922dd84dd3b4eb9bd73bd338b, type: 3}
+  - {fileID: 8300000, guid: 1de72f27f5330490f895ba21a5c7c746, type: 3}
+  - {fileID: 8300000, guid: 67a1b7925dcb6426d85f71e331e0ab30, type: 3}
+  - {fileID: 8300000, guid: f1f8eddf1ac7a4528b4ebbd2015edd30, type: 3}
