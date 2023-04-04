@@ -631,22 +631,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acaeeec824b240a3a5d0de8510f6b924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameEvent: {fileID: 11400000, guid: 193777a7db08e44f0847b4454dc4ca8e, type: 2}
-  response:
+  m_GameEvent: {fileID: 11400000, guid: 193777a7db08e44f0847b4454dc4ca8e, type: 2}
+  m_Response:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3030067361211886913}
-        m_TargetAssemblyTypeName: DrillAudioController, Assembly-CSharp
-        m_MethodName: PlayDrillSoundSequence
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &769196726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -659,22 +647,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acaeeec824b240a3a5d0de8510f6b924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameEvent: {fileID: 11400000, guid: c810f642f48ef4831ae0692b99bfe846, type: 2}
-  response:
+  m_GameEvent: {fileID: 11400000, guid: c810f642f48ef4831ae0692b99bfe846, type: 2}
+  m_Response:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3030067361211886913}
-        m_TargetAssemblyTypeName: DrillAudioController, Assembly-CSharp
-        m_MethodName: PlayEndReleaseSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!82 &6682474550750188348
 AudioSource:
   m_ObjectHideFlags: 0
