@@ -1897,26 +1897,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AmbienceManager
       objectReference: {fileID: 0}
-    - target: {fileID: 5651516672889581092, guid: 42578e9d7c6f543efa53a87dfd83ac94,
-        type: 3}
-      propertyPath: Loop
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5651516672889581092, guid: 42578e9d7c6f543efa53a87dfd83ac94,
-        type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5651516672889581092, guid: 42578e9d7c6f543efa53a87dfd83ac94,
-        type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5651516672889581092, guid: 42578e9d7c6f543efa53a87dfd83ac94,
-        type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42578e9d7c6f543efa53a87dfd83ac94, type: 3}
 --- !u!1001 &6845475386301565022
