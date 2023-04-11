@@ -1,0 +1,16 @@
+{
+    "name": "CodeInTheFirstProyect",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e9b04029a44fe72408d2ecb708cafd21"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
