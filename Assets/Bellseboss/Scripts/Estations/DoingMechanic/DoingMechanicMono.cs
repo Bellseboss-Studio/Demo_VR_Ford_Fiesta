@@ -8,6 +8,7 @@ public class DoingMechanicMono : MonoBehaviour
     [SerializeField] private GameObject teleport;
 
     private bool stayInPosition;
+    private bool playerTakeInHandHidraulic;
     internal void EnableTeleport()
     {
         teleport.SetActive(true);
@@ -20,5 +21,18 @@ public class DoingMechanicMono : MonoBehaviour
 
     public void SetStayInPosition(bool stay){
         stayInPosition = stay;
+    }
+
+    public void SayWhatIsTheNextStep(){
+        //Enable audio to what is the next step
+    }
+
+    internal bool PlayerTakeTheHidraulic()
+    {
+        return playerTakeInHandHidraulic;
+    }
+
+    public void PlayerTakeTheHidraulicInHand(bool yesOrNot){
+        playerTakeInHandHidraulic = yesOrNot;
     }
 }

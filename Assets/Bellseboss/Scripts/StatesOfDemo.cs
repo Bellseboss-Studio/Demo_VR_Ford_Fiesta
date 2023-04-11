@@ -134,11 +134,15 @@ public class StatesOfDemo : MonoBehaviour
             .Add(() =>
             {
                 doingMechanic.EnableTeleport();
-            }).Wait(()=>true,10)
+                HideTeleportToGoToBegging();
+                audioIntro.HideAllIcons();
+            }).Wait(()=>doingMechanic.StayInPositionToDoing(),0.5f)
             .Add(() =>
             {
-                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Show whats is the next action");
-                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Mark the tire and tornillo and waiting to start the hidraulic gun");
+                doingMechanic.SayWhatIsTheNextStep();//audio para decirle que tome el coso
+            }).Wait(()=>doingMechanic.PlayerTakeTheHidraulic(), 0.5f)
+            .Add(()=>{
+                
             })
             .Add(() => _waitingForChoice.Play());
         _intro.Play();
