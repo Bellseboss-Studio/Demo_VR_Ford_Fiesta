@@ -181,8 +181,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5735297858055406415}
-  - component: {fileID: 5651516672889581092}
   - component: {fileID: 9134786451323675702}
+  - component: {fileID: 5651516672889581092}
   m_Layer: 0
   m_Name: WorkshopMusic_Source
   m_TagString: Untagged
@@ -205,6 +205,25 @@ Transform:
   m_Father: {fileID: 767927496694405270}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9134786451323675702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2479034084424907176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd2f25aef4754cdebb8cfe2fe9442ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UseSoundCollection: 0
+  m_SoundCollectionSO: {fileID: 0}
+  m_AudioClips:
+  - {fileID: 8300000, guid: 3f4c79b59866c21439ed5be6ae6610e9, type: 3}
+  m_AudioSource: {fileID: 5651516672889581092}
+  m_AudioOutput: {fileID: 4807674432732824075, guid: 4f7cd5995256f457dbfe2c524c5e475b,
+    type: 2}
 --- !u!82 &5651516672889581092
 AudioSource:
   m_ObjectHideFlags: 0
@@ -214,10 +233,9 @@ AudioSource:
   m_GameObject: {fileID: 2479034084424907176}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 4807674432732824075, guid: 4f7cd5995256f457dbfe2c524c5e475b,
-    type: 2}
-  m_audioClip: {fileID: 8300000, guid: 3f4c79b59866c21439ed5be6ae6610e9, type: 3}
-  m_PlayOnAwake: 1
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -302,25 +320,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &9134786451323675702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2479034084424907176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dd2f25aef4754cdebb8cfe2fe9442ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UseSoundCollection: 0
-  m_SoundCollectionSO: {fileID: 0}
-  m_AudioClips:
-  - {fileID: 8300000, guid: 3f4c79b59866c21439ed5be6ae6610e9, type: 3}
-  m_AudioSource: {fileID: 5651516672889581092}
-  m_AudioOutput: {fileID: 4807674432732824075, guid: 4f7cd5995256f457dbfe2c524c5e475b,
-    type: 2}
 --- !u!1 &3296702419635201392
 GameObject:
   m_ObjectHideFlags: 0
