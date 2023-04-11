@@ -10,6 +10,8 @@ public class StatesOfDemo : MonoBehaviour
 
     [SerializeField] private ExperienceOfDriving experience;
 
+    [SerializeField] private DoingMechanicMono doingMechanic;
+
     [SerializeField] private GameObject teleportToGoToBegging;
 
     private TeaTime _intro, _waitingForChoice, _customizationCar, _experienceOfDriving, _workshopOfChangeTire;
@@ -131,9 +133,7 @@ public class StatesOfDemo : MonoBehaviour
         _workshopOfChangeTire = this.tt().Pause()
             .Add(() =>
             {
-                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"enable teleport in table");
-                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"show what is the next action");
-                ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Wait for take the gunHidraulic");
+                doingMechanic.EnableTeleport();
             }).Wait(()=>true,10)
             .Add(() =>
             {
