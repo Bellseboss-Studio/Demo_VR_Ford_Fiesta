@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class StatesOfDemo : MonoBehaviour
@@ -14,7 +15,7 @@ public class StatesOfDemo : MonoBehaviour
 
     [SerializeField] private GameObject teleportToGoToBegging;
 
-    private TeaTime _intro, _waitingForChoice, _customizationCar, _experienceOfDriving, _workshopOfChangeTire;
+    private TeaTime _intro, _waitingForChoice, _customizationCar, _experienceOfDriving, _workshopOfChangeTire, _waitingForWantExitOrStayInExperience, _wantGoBackToBeging;
     
     void Start()
     {
@@ -139,13 +140,97 @@ public class StatesOfDemo : MonoBehaviour
             }).Wait(()=>doingMechanic.StayInPositionToDoing(),0.5f)
             .Add(() =>
             {
-                doingMechanic.SayWhatIsTheNextStep();//audio para decirle que tome el coso
-            }).Wait(()=>doingMechanic.PlayerTakeTheHidraulic(), 0.5f)
+                doingMechanic.SayWhatIsTheNextStep();//audio para decirle que Precione el boton
+                doingMechanic.ShowButton();
+            }).Wait(()=>doingMechanic.IsPlayerPressButton(), 0.5f)
             .Add(()=>{
-                
+                //Elevate the car
+                doingMechanic.StartSoundToElevetateCar();
             })
-            .Add(() => _waitingForChoice.Play());
+            .Wait(()=>doingMechanic.IsPlayerWatchingTheCar(), 0.5f)
+            .Add(()=>{
+                doingMechanic.StartToLiftTheCar();
+            })
+            .Wait(()=>doingMechanic.IsFinishedToLiftTheCar(), 0.5f)
+            .Add(()=>{
+                doingMechanic.StartSoundFromToolBox();
+            })
+            .Wait(()=>doingMechanic.IsPlayerTouchTheToolBox(),0.5f)
+            .Add(()=>{
+                doingMechanic.StartAnimationToToolBox();
+            })
+            .Wait(()=>doingMechanic.IsFinishedTheAnimationOfToolBox(), 0.5f)
+            .Add(()=>{
+                doingMechanic.ShowSphereIntoPistol();
+            })
+            .Wait(()=>doingMechanic.PlayerTakeTheHidraulic(), 0.5f)
+            .Add(()=>{
+                doingMechanic.SayWhatIsTheNextStep();//audio para decirle que tome el coso
+                doingMechanic.ShowTeleportWhentThePlayerWillGoToChangeTireOfCar();
+            })
+            .Wait(()=>doingMechanic.IsPlayerInTeleportNextToCarForChangeOfTire(), 0.5f)
+            .Add(()=>{
+                //audio para decirle que active el taladro y lo coloque en el perno para sacar el tornillo
+                doingMechanic.SayWhatIsTheNextStep();
+            })
+            .Wait(()=>doingMechanic.IsPlayerGetOutTheFirstBolt())
+            .Add(()=>{
+                //Say good job and retired the next bolt
+                doingMechanic.SayWhatIsTheNextStep();
+            })
+            .Wait(()=>doingMechanic.IsAllBoltRemoved(), 0.5f)
+            .Add(()=>{
+                //Dice que ahora debe de quitar la llanta y la coloque en el sitio
+                doingMechanic.SayWhatIsTheNextStep();
+                doingMechanic.ShowTheAreaWhentPlayerLeaveTheTireInThePlace();
+            })
+            .Wait(()=>doingMechanic.IsTireRemovedInTheCorrectPlace(), 0.5f)
+            .Add(()=>{
+                //Dice: que ahora mire el espacio que quedo.
+                doingMechanic.SayWhatIsTheNextStep();
+            })
+            .Wait(()=>doingMechanic.IsPlayerWatchingTheEmptyZone(),0.5f)
+            .Add(()=>{
+                doingMechanic.StartAnimationToBreakSystem();
+                _waitingForWantExitOrStayInExperience.Play();
+            });
+
+            _waitingForWantExitOrStayInExperience = this.tt().Pause()
+            .Wait(()=>doingMechanic.IsPlayerWatchAllComponentsOrWatchTheBegingOfExperience(), 0.5f)
+            .Add(()=>{
+                doingMechanic.ShowQuestionIfWantGoToTheBeginOfExperience();
+            })
+            .Wait(()=>doingMechanic.IsPlayerDecidedForAnyOption(), 0.5f)
+            .Add(() => {
+                ServiceLocator.Instance.GetService<IDebugMediator>().LogR($"User Selected {doingMechanic.WhatWasTheOptionSelected()}");
+                switch(doingMechanic.WhatWasTheOptionSelected()){
+                    case 0://Stay In Tire Change
+                        _waitingForWantExitOrStayInExperience.Restart();
+                        break;
+                    case 1://Want to exit
+                        _wantGoBackToBeging.Restart();
+                        break;
+                }
+            });
+        _wantGoBackToBeging = this.tt().Pause()
+        .Add(()=>{
+            ShowTeleportToGoToBegging();
+        })
+        .Wait(()=>IsPlayerTeleportIntoBeging(), 0.5f);
+
+        
         _intro.Play();
+    }
+
+    private bool isPlayerTeleportingToBeging;
+
+    public void PlayerTeleportingToBeging(bool yesOrNot){
+        isPlayerTeleportingToBeging = yesOrNot;
+    }
+
+    private bool IsPlayerTeleportIntoBeging()
+    {
+        return isPlayerTeleportingToBeging;
     }
 
     public TeaTime GetTeaTime()
