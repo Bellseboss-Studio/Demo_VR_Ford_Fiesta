@@ -10,6 +10,8 @@ public class DoingMechanicMono : MonoBehaviour
     [SerializeField] private ButtonComponent button;
     [SerializeField] private PlayerWatchTheCar waching;
 
+    [SerializeField] private LiftCarWithAnimation liftCar;
+
     private bool stayInPosition;
     private bool playerTakeInHandHidraulic;
 
@@ -75,12 +77,12 @@ public class DoingMechanicMono : MonoBehaviour
 
     internal void StartToLiftTheCar()
     {
-        throw new NotImplementedException();
+        liftCar.StartLift();
     }
 
     internal bool IsFinishedToLiftTheCar()
     {
-        throw new NotImplementedException();
+        return liftCar.IsFinishedTheAnimation;
     }
 
     internal void StartSoundFromToolBox()
