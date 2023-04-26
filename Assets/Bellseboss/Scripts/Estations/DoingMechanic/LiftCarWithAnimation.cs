@@ -21,7 +21,7 @@ public class LiftCarWithAnimation : MonoBehaviour
 
     private IEnumerator IsFinishedAnimation(){
         isFinishedTheAnimation = false;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         isFinishedTheAnimation = true;
     }
 

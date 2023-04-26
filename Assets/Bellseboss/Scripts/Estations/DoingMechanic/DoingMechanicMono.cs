@@ -3,14 +3,16 @@ using UnityEngine;
 
 public class DoingMechanicMono : MonoBehaviour
 {
-    [SerializeField] private AudioClip clipToFirstStep, soundElevatorCar;
+    [SerializeField] private AudioClip clipToFirstStep, soundElevatorCar, SFXButton;
     [SerializeField] private GameObject teleport;
 
-    [SerializeField] private AudioSource source;
+    [SerializeField] private AudioSource sourceButton, sourceElevator, sourceGeneral;
     [SerializeField] private ButtonComponent button;
     [SerializeField] private PlayerWatchTheCar waching;
 
     [SerializeField] private LiftCarWithAnimation liftCar;
+
+    [SerializeField] private ToolBocComponent toolbox;
 
     private bool stayInPosition;
     private bool playerTakeInHandHidraulic;
@@ -42,7 +44,9 @@ public class DoingMechanicMono : MonoBehaviour
 
     public void SayWhatIsTheNextStep(){
         //Enable audio to what is the next step
-        source.PlayOneShot(clipToFirstStep);
+        sourceGeneral.PlayOneShot(clipToFirstStep);
+        sourceButton.clip = SFXButton;
+        sourceButton.Play();
     }
 
     internal bool PlayerTakeTheHidraulic()
@@ -66,7 +70,8 @@ public class DoingMechanicMono : MonoBehaviour
 
     internal void StartSoundToElevetateCar()
     {
-        source.PlayOneShot(soundElevatorCar);
+        sourceElevator.clip = soundElevatorCar;
+        sourceElevator.Play();
         waching.ShowCubeLookAt();
     }
 
@@ -77,6 +82,7 @@ public class DoingMechanicMono : MonoBehaviour
 
     internal void StartToLiftTheCar()
     {
+        waching.HideCubeLookAt();
         liftCar.StartLift();
     }
 
@@ -87,22 +93,22 @@ public class DoingMechanicMono : MonoBehaviour
 
     internal void StartSoundFromToolBox()
     {
-        throw new NotImplementedException();
+        toolbox.StartSoundForWatch();
     }
 
     internal bool IsPlayerTouchTheToolBox()
     {
-        throw new NotImplementedException();
+        return toolbox.IsToolBoxTouched();
     }
 
     internal void StartAnimationToToolBox()
     {
-        throw new NotImplementedException();
+        toolbox.StartAnimationToOpenBox();
     }
 
     internal bool IsFinishedTheAnimationOfToolBox()
     {
-        throw new NotImplementedException();
+        return toolbox.IsAnimationToOpenToolBoxFinished();
     }
 
     internal void ShowSphereIntoPistol()
