@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using Bellseboss.Audio.Scripts;
 using UnityEngine;
 using UnityEngine.Audio;
+using Event = Bellseboss.Audio.Scripts.Event;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(AudioSource))]
 public class RandomAudioClipPlayer : MonoBehaviour
 {
+    [SerializeField] private bool m_UseSoundCollecionSO;
     [SerializeField] private SoundCollectionSO m_SoundCollection;
-    private List<AudioClip> m_AudioClips = new List<AudioClip>();
+    [SerializeField] private List<AudioClip> m_AudioClips = new List<AudioClip>();
     [SerializeField] private AudioSource m_Audiosource;
     [SerializeField] private AudioMixerGroup m_AudioMixerGroup;
     [SerializeField] private bool m_RandomizePitch = false;
@@ -22,16 +24,23 @@ public class RandomAudioClipPlayer : MonoBehaviour
 
     [SerializeField] private bool m_PlayOnEnable = false;
     [SerializeField] private bool m_DeactivateAfterPlaying = false;
-    
+
+    [SerializeField] private bool m_SendEventOnFinished;
+    [SerializeField] private Event m_Event;
 
     private void OnEnable()
     {
         CheckDependencies();
-        CacheAudioClips();
+        
+        if (m_UseSoundCollecionSO)
+        {
+            CacheAudioClips();
+        }
         if (m_PlayOnEnable)
         {
             StartCoroutine(PlaySound());
         }
+        
     }
 
     public void TriggerSound()
@@ -42,6 +51,16 @@ public class RandomAudioClipPlayer : MonoBehaviour
         }
     }
 
+    private void OnFinishedSendEvent()
+    {
+        if (!m_Event)
+        {
+            m_Event = new Event();
+            m_Event.name = "Audio_Finished";
+        }
+        m_Event.Occurred();
+    }
+
     public IEnumerator PlaySound()
     {
         m_Audiosource.pitch = m_RandomizePitch
@@ -50,6 +69,10 @@ public class RandomAudioClipPlayer : MonoBehaviour
         AudioClip clip = m_AudioClips[Random.Range(0, m_AudioClips.Count)];
         m_Audiosource.PlayOneShot(clip);
         yield return new WaitForSeconds(clip.length);
+        if (m_SendEventOnFinished)
+        {
+            OnFinishedSendEvent();
+        }
         if (m_DeactivateAfterPlaying)
         {
             gameObject.SetActive(false);
@@ -72,7 +95,7 @@ public class RandomAudioClipPlayer : MonoBehaviour
             m_Audiosource.outputAudioMixerGroup = m_AudioMixerGroup;
         }
 
-        if (m_SoundCollection == null)
+        if (m_SoundCollection == null && m_UseSoundCollecionSO)
         {
             Debug.Log("Sound collection not present in: " + gameObject.name);
         }
