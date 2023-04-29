@@ -1,20 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Event = Bellseboss.Audio.Scripts.Event;
 
-public class AudioIntro : MonoBehaviour
+public class AnimationManager : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip customization, driverExperience, doingMechanic;
     [SerializeField] private Animator customizationAnim, driverExperienceAnim, doingMechanicAnim;
     [SerializeField] private GameObject customTeleport, experienceTeleport, doingTeleport;
     private bool _finishedToPlay;
     private int _election;
-    public void StartAudio()
-    {
-        StartCoroutine(PlaySound());
-        ShowAllIcons();
-    }
-
+    
     public void ShowAllIcons()
     {
         SetStateOfIcons(true);
@@ -31,53 +25,31 @@ public class AudioIntro : MonoBehaviour
     {
         //ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"audioSource.isPlaying {audioSource.isPlaying}");
         return _finishedToPlay;
+        
     }
 
-    public void StartOptionCarCustomization()
+    public void NotifyAudioFinished()
     {
-        audioSource.clip = customization;
-        StartCoroutine(PlaySound());
+        _finishedToPlay = true;
+        HasAudioFinished();
     }
-
+    
     public void StartAnimationCarCustomization()
     {
         //states or directly 
         customizationAnim.SetTrigger("option");
     }
-
-    public void StartOptionDriverExperience()
-    {
-        audioSource.clip = driverExperience;
-        StartCoroutine(PlaySound());
-    }
-
+    
     public void StartAnimationDriverExperience()
     {
         driverExperienceAnim.SetTrigger("option");
     }
-
-    public void StartOptionDoingMechanic()
-    {
-        audioSource.clip = doingMechanic;
-        StartCoroutine(PlaySound());
-    }
-
+    
     public void StartAnimationDoingMechanic()
     {
         doingMechanicAnim.SetTrigger("option");
     }
-
-    private IEnumerator PlaySound()
-    {
-        audioSource.Play();
-        _finishedToPlay = false;
-        while (audioSource.isPlaying)
-        {
-            yield return null;
-        }
-        _finishedToPlay = true;
-    }
-
+    
     public void SetElection(int e)
     {
         _election = e;

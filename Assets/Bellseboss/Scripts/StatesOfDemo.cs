@@ -1,10 +1,14 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Event = Bellseboss.Audio.Scripts.Event;
 
 public class StatesOfDemo : MonoBehaviour
 {
-    [SerializeField] private AudioIntro audioIntro;
+    [FormerlySerializedAs("audioIntro")] [SerializeField] private AnimationManager animationManager;
 
+    [SerializeField] private AudioSequencer m_AudioSequencer;
+    
     [SerializeField] private WaitingForSelectOptionMono waiting;
 
     [SerializeField] private CarCustomMono carCustom;
@@ -16,48 +20,54 @@ public class StatesOfDemo : MonoBehaviour
     [SerializeField] private GameObject teleportToGoToBegging;
 
     private TeaTime _intro, _waitingForChoice, _customizationCar, _experienceOfDriving, _workshopOfChangeTire, _waitingForWantExitOrStayInExperience, _wantGoBackToBeging;
-    
+
+    private void Awake()
+    {
+        CheckDependencies();
+    }
+
     void Start()
     {
-
+        
         _intro = this.tt().Pause().Add(() =>
             {
                 //Sound Play in audio of begin
-                GetAudioIntro().StartAudio();
-                GetAudioIntro().HideTeleportsToEnvironment();
+                SetAnimAndIcons().ShowAllIcons();
+                PlayVOStepAudio().PlayInitialAudio();
+                SetAnimAndIcons().HideTeleportsToEnvironment();
                 ServiceLocator.Instance.GetService<IDebugMediator>().LogL("Start intro");
             })
-            .Wait(() => GetAudioIntro().HasAudioFinished(), 0.5f)
+            .Wait(() => PlayVOStepAudio().HasAudioFinished(), 0.5f)
             .Add(() =>
             {
                 ServiceLocator.Instance.GetService<IDebugMediator>().LogL("Start Car Custom");
                 //Play sound the second audio
-                GetAudioIntro().StartOptionCarCustomization();
-                //activate animation to show the icon
-                GetAudioIntro().StartAnimationCarCustomization();
+                PlayVOStepAudio().PlayOptionCarCustomizationAudio();
+               //activate animation to show the icon
+                SetAnimAndIcons().StartAnimationCarCustomization();
                 //first icon
             })
-            .Wait(() => GetAudioIntro().HasAudioFinished(), 0.1f)
+            .Wait(() => PlayVOStepAudio().HasAudioFinished(), 0.1f)
             .Add(() =>
             {
                 ServiceLocator.Instance.GetService<IDebugMediator>().LogL("Start Driver experience");
                 //Play sound the third audio
-                GetAudioIntro().StartOptionDriverExperience();
+                PlayVOStepAudio().PlayDriverExperienceAudio();
                 //activate animation to show the icon
-                GetAudioIntro().StartAnimationDriverExperience();
+                SetAnimAndIcons().StartAnimationDriverExperience();
                 //second icon
             })
-            .Wait(() => GetAudioIntro().HasAudioFinished(), 0.1f)
+            .Wait(() => PlayVOStepAudio().HasAudioFinished(), 0.1f)
             .Add(() =>
             {
                 ServiceLocator.Instance.GetService<IDebugMediator>().LogL("Start Doing mechanic");
                 //Play sound the fourth audio
-                GetAudioIntro().StartOptionDoingMechanic();
+                PlayVOStepAudio().PlayOptionMechanicExperienceAudio();
                 //activate animation to show the icon
-                GetAudioIntro().StartAnimationDoingMechanic();
+                SetAnimAndIcons().StartAnimationDoingMechanic();
                 //third icon
             })
-            .Wait(() => GetAudioIntro().HasAudioFinished(), 0.1f)
+            .Wait(() => PlayVOStepAudio().HasAudioFinished(), 0.1f)
             .Add(() => _waitingForChoice.Play());
 
         _waitingForChoice = this.tt().Pause()
@@ -110,7 +120,7 @@ public class StatesOfDemo : MonoBehaviour
             .Add(() =>
             {
                 experience.EnableTeleportInDoor();
-                audioIntro.HideAllIcons();
+                animationManager.HideAllIcons();
                 HideTeleportToGoToBegging();
             }).Wait(()=>experience.HasTeleportInDoor(),0.5f)
             .Add(() =>
@@ -136,7 +146,7 @@ public class StatesOfDemo : MonoBehaviour
             {
                 doingMechanic.EnableTeleport();
                 HideTeleportToGoToBegging();
-                audioIntro.HideAllIcons();
+                animationManager.HideAllIcons();
             }).Wait(()=>doingMechanic.StayInPositionToDoing(),0.5f)
             .Add(() =>
             {
@@ -222,6 +232,8 @@ public class StatesOfDemo : MonoBehaviour
         _intro.Play();
     }
 
+    
+
     private bool isPlayerTeleportingToBeging;
 
     public void PlayerTeleportingToBeging(bool yesOrNot){
@@ -240,7 +252,7 @@ public class StatesOfDemo : MonoBehaviour
 
     public void HideOptionsToDoing()
     {
-        audioIntro.HideAllIcons();
+        animationManager.HideAllIcons();
     }
 
     public CarCustomMono GetCarCustomMono()
@@ -258,11 +270,14 @@ public class StatesOfDemo : MonoBehaviour
         teleportToGoToBegging.SetActive(false);
     }
 
-    public AudioIntro GetAudioIntro()
+    public AnimationManager SetAnimAndIcons()
     {
-        return audioIntro;
+        return animationManager;
     }
-
+    public AudioSequencer PlayVOStepAudio()
+    {
+        return m_AudioSequencer;
+    }
     public WaitingForSelectOptionMono GetWaitingMono()
     {
         return waiting;
@@ -270,7 +285,7 @@ public class StatesOfDemo : MonoBehaviour
 
     public void ShowButtonToUi()
     {
-        audioIntro.ShowAllIcons();
+        animationManager.ShowAllIcons();
     }
 
     public void ShowOptionsInBegging()
@@ -278,5 +293,13 @@ public class StatesOfDemo : MonoBehaviour
         ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"ResetAllComponents");
         GetWaitingMono().SetOption(0);
         _waitingForChoice.Restart();
+    }
+    
+    private void CheckDependencies()
+    {
+        if (m_AudioSequencer == null)
+        {
+            m_AudioSequencer = FindObjectOfType<AudioSequencer>();
+        }
     }
 }
