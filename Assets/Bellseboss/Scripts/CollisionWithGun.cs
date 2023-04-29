@@ -4,18 +4,18 @@ using UnityEngine;
 public class CollisionWithGun : MonoBehaviour
 {
     [SerializeField] private GameObject[] parts;
+    [SerializeField] private float tolerance;
     private bool isPosition;
+
+    private Tornillo tornilloInTouch;
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Tornillo"))
         {
-            other.transform.parent.gameObject.GetComponent<Tornillo>().HideGun();
-            foreach (var part in parts)
-            {
-                part.SetActive(true);
-            }
+            other.gameObject.GetComponent<Tornillo>().RemoveBolt(false);
             isPosition = false;   
+            tornilloInTouch = null;
         }
     }
 
@@ -23,24 +23,20 @@ public class CollisionWithGun : MonoBehaviour
     {
         if (other.CompareTag("Tornillo"))
         {
+            tornilloInTouch = other.gameObject.GetComponent<Tornillo>();
+            // Calculate the dot product between the two vectors
+            float dotProduct = Vector3.Dot(other.transform.forward, transform.forward);
+            // Check if the dot product is close to 1 (within a tolerance)
+            var isAligned = Mathf.Abs(dotProduct) < tolerance;
             ServiceLocator.Instance.GetService<IDebugMediator>().LogL(
-                $"Distance {Vector3.Distance(other.transform.position, transform.position)} - " +
-                $"Magnitude {(other.transform.forward - transform.forward).magnitude}");
-            if (Vector3.Distance(other.transform.position, transform.position) < 0.1f && (other.transform.forward - transform.forward).magnitude <= 0.1f)
+                $"Distance {Vector3.Distance(other.transform.position, transform.position)} - " + 
+                $"isAligned {isAligned} - " +
+                $"dotProduct {dotProduct}");
+            if (Vector3.Distance(other.transform.position, transform.position) < 0.1f && isAligned)
             {
-                other.transform.parent.gameObject.GetComponent<Tornillo>().ShowGun();
-                foreach (var part in parts)
-                {
-                    part.SetActive(false);
-                }
                 isPosition = true;   
             }else
             {
-                other.transform.parent.gameObject.GetComponent<Tornillo>().HideGun();
-                foreach (var part in parts)
-                {
-                    part.SetActive(true);
-                }
                 isPosition = false;
             }
         }
@@ -50,5 +46,10 @@ public class CollisionWithGun : MonoBehaviour
     public bool StayInPosition()
     {
         return isPosition;
+    }
+
+    internal Tornillo GetTornillo()
+    {
+        return tornilloInTouch;
     }
 }

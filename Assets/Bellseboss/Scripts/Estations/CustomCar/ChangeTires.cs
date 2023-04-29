@@ -6,6 +6,8 @@ public class ChangeTires : CustomElement
     [SerializeField] protected GameObject[] listOfParts;
     [SerializeField] private Transform[] pointToChangeElement;
     private List<GameObject> elementConcurrent;
+
+    public List<GameObject> ElementCurrents => elementConcurrent;
     protected override void Start()
     {
         elementConcurrent = new List<GameObject>();

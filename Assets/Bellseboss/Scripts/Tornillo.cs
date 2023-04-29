@@ -1,36 +1,30 @@
-﻿using System;
+﻿    using System;
 using UnityEngine;
 
 public class Tornillo : MonoBehaviour
 {
-    [SerializeField] private Transform gunPosition;
-    [SerializeField] private GameObject[] parts;
+    [SerializeField] private float timeToActivateToRemoveBolt;
+    [SerializeField] private Transform positionToPistol;
+    public Action onFinishedRemove;
+    private float deltaTimeLocal;
+    private bool isEnableRemoveBolt;
+    private bool isRemoveBolt;
 
-    private void Start()
-    {
-        HideGun();
+    public bool IsRemovedBolt => isRemoveBolt;
+
+    public Transform PositionToPistol => positionToPistol;
+
+    public void RemoveBolt(bool yesOrNot){
+        isEnableRemoveBolt = yesOrNot;
     }
 
-    public Vector3 GetGunPosition()
-    {
-        return gunPosition.position;
-    }
-
-    public void HideGun()
-    {
-        ManagerOfGameObject(false);
-    }
-
-    public void ShowGun()
-    {
-        ManagerOfGameObject(true);
-    }
-
-    private void ManagerOfGameObject(bool show)
-    {
-        foreach (var part in parts)
-        {
-            part.SetActive(show);
+    private void Update() {
+        if(isEnableRemoveBolt && !isRemoveBolt){
+            if(deltaTimeLocal >= timeToActivateToRemoveBolt){
+                isRemoveBolt = true;
+                onFinishedRemove?.Invoke();
+            }
+            deltaTimeLocal += Time.deltaTime;
         }
     }
 }
