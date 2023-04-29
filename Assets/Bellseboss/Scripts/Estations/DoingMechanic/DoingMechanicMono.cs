@@ -3,17 +3,27 @@ using UnityEngine;
 
 public class DoingMechanicMono : MonoBehaviour
 {
-    [SerializeField] private AudioClip clipToFirstStep, soundElevatorCar;
-    [SerializeField] private GameObject teleport;
+    [SerializeField] private AudioClip clipToFirstStep, soundElevatorCar, SFXButton;
+    [SerializeField] private GameObject teleport, teleportForChangeTireOfCar;
 
-    [SerializeField] private AudioSource source;
+    [SerializeField] private AudioSource sourceButton, sourceElevator, sourceGeneral;
     [SerializeField] private ButtonComponent button;
     [SerializeField] private PlayerWatchTheCar waching;
+
+    [SerializeField] private LiftCarWithAnimation liftCar;
+
+    [SerializeField] private ToolBocComponent toolbox;
+    [SerializeField] private EmisorComponent pistolEmisorComponent;
+    [SerializeField] private ChangeTires listOfTires;
+    [SerializeField] private BehaviorOfCylinder behaviorOfCilinder;
 
     private bool stayInPosition;
     private bool playerTakeInHandHidraulic;
 
     private bool playerPressButton;
+
+    private bool isPlayerTeleportedInNextToChangeTire;
+    private bool isTheFirstBoltRemoved, isAllBoltRemoved;
 
     private void Start() {
         button.onButtonPress.AddListener(()=>{
@@ -40,7 +50,7 @@ public class DoingMechanicMono : MonoBehaviour
 
     public void SayWhatIsTheNextStep(){
         //Enable audio to what is the next step
-        source.PlayOneShot(clipToFirstStep);
+        sourceGeneral.PlayOneShot(clipToFirstStep);
     }
 
     internal bool PlayerTakeTheHidraulic()
@@ -60,11 +70,17 @@ public class DoingMechanicMono : MonoBehaviour
     internal void ShowButton()
     {
         button.gameObject.SetActive(true);
+        sourceButton.clip = SFXButton;
+        sourceButton.loop = true;
+        sourceButton.Play();
     }
 
     internal void StartSoundToElevetateCar()
     {
-        source.PlayOneShot(soundElevatorCar);
+        sourceButton.Stop();
+        sourceElevator.clip = soundElevatorCar;
+        sourceElevator.loop = true;
+        sourceElevator.Play();
         waching.ShowCubeLookAt();
     }
 
@@ -75,57 +91,81 @@ public class DoingMechanicMono : MonoBehaviour
 
     internal void StartToLiftTheCar()
     {
-        throw new NotImplementedException();
+        waching.HideCubeLookAt();
+        liftCar.StartLift();
     }
 
     internal bool IsFinishedToLiftTheCar()
     {
-        throw new NotImplementedException();
+        return liftCar.IsFinishedTheAnimation;
     }
 
     internal void StartSoundFromToolBox()
     {
-        throw new NotImplementedException();
+        sourceElevator.Stop();
+        toolbox.StartSoundForWatch();
     }
 
     internal bool IsPlayerTouchTheToolBox()
     {
-        throw new NotImplementedException();
+        return toolbox.IsToolBoxTouched();
     }
 
     internal void StartAnimationToToolBox()
     {
-        throw new NotImplementedException();
+        toolbox.StartAnimationToOpenBox();
     }
 
     internal bool IsFinishedTheAnimationOfToolBox()
     {
-        throw new NotImplementedException();
+        return toolbox.IsAnimationToOpenToolBoxFinished();
     }
 
     internal void ShowSphereIntoPistol()
     {
-        throw new NotImplementedException();
+        pistolEmisorComponent.gameObject.SetActive(true);
     }
 
     internal void ShowTeleportWhentThePlayerWillGoToChangeTireOfCar()
     {
-        throw new NotImplementedException();
+        //StopRotationOFCarAndSetupInAScpecificRotation
+        behaviorOfCilinder.ResetRotation();
+        teleportForChangeTireOfCar.SetActive(true);
+        //Activate Bolt in tire
+        foreach(var tire in listOfTires.ElementCurrents){
+            var removeBolt = tire.GetComponent<RemoveRimBolts>();
+            removeBolt.Configurate();
+            removeBolt.onRemoveTheFirstBolt += IsRemovedTheFirstBolt;
+            removeBolt.onRemoveAllBolt += RemoveAllBolt;
+        }
+        pistolEmisorComponent.Disable();
+    }
+
+    private void RemoveAllBolt(){
+        isAllBoltRemoved = true;
+    }
+
+    private void IsRemovedTheFirstBolt(){
+        isTheFirstBoltRemoved = true;
+    }
+
+    public void IsPlayerNextToChangeTireCar(bool yesOrNot){
+        isPlayerTeleportedInNextToChangeTire = yesOrNot;
     }
 
     internal bool IsPlayerInTeleportNextToCarForChangeOfTire()
     {
-        throw new NotImplementedException();
+        return isPlayerTeleportedInNextToChangeTire;
     }
 
     internal bool IsPlayerGetOutTheFirstBolt()
     {
-        throw new NotImplementedException();
+        return isTheFirstBoltRemoved;
     }
 
     internal bool IsAllBoltRemoved()
     {
-        throw new NotImplementedException();
+        return isAllBoltRemoved;
     }
 
     internal void ShowTheAreaWhentPlayerLeaveTheTireInThePlace()

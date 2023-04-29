@@ -50,12 +50,21 @@ public class PistolHidraulic : MonoBehaviour
             }
         });
     }
-
+    private void Update() {
+        if (collision.StayInPosition()){
+            transform.position = collision.GetTornillo().PositionToPistol.position;
+        }
+    }
     private void FixedUpdate()
     {
         if (_useImpulse)
         {
-            control.SendHapticImpulse(0.7f, 0.1f);
+            var amplitude = 0.7f;
+            var logitud = 0.1f;
+            if(collision.StayInPosition()){
+                amplitude = 0.9f;
+            }
+            control.SendHapticImpulse(amplitude, logitud);
         }
     }
 }
