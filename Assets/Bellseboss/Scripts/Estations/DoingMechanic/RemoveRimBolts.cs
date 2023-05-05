@@ -17,7 +17,6 @@ public class RemoveRimBolts : MonoBehaviour{
     }
 
     public void Configurate(){
-        ServiceLocator.Instance.GetService<IDebugMediator>().LogR("Configurate tire!");
         foreach(var bolt in boltsIntantiate){
             Destroy(bolt);
         }
@@ -27,11 +26,14 @@ public class RemoveRimBolts : MonoBehaviour{
             bolt.transform.localScale = Vector3.one;
             bolt.GetComponent<Tornillo>().onFinishedRemove += ()=>{
                 if(!isFinishedTheFirstBolt){
+                    //ServiceLocator.Instance.GetService<IDebugMediator>().LogL("Removed the first bolt");
                     onRemoveTheFirstBolt?.Invoke();
                     isFinishedTheFirstBolt = true;
                 }
                 countOfBolts++;
+                //ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"{countOfBolts} {listOfPositionToBolts.Length}");
                 if(countOfBolts >= listOfPositionToBolts.Length){
+                    ServiceLocator.Instance.GetService<IDebugMediator>().LogL("Removed all bolt");
                     onRemoveAllBolt?.Invoke();
                 }
             };

@@ -31,7 +31,8 @@ public class PistolHidraulic : MonoBehaviour
                 {
                     //IsAttachedToNut different sound
                     ServiceLocator.Instance.GetService<IDebugMediator>().LogR("RUUUUNNNN In Object");
-                }    
+                }
+                collision.GetTornillo()?.RemoveBolt(collision.StayInPosition());
             }
             
         });

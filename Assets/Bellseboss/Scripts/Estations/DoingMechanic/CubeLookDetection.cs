@@ -30,6 +30,6 @@ public class CubeLookDetection : MonoBehaviour
         }
 
         // Do something with isLookingAtCube
-        ServiceLocator.Instance.GetService<IDebugMediator>().LogR($"isLookingAtCube {isLookingAtCube}");
+        //ServiceLocator.Instance.GetService<IDebugMediator>().LogR($"isLookingAtCube {isLookingAtCube}");
     }
 }

@@ -142,6 +142,7 @@ public class DoingMechanicMono : MonoBehaviour
     }
 
     private void RemoveAllBolt(){
+        //ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Removed all bolt {isAllBoltRemoved}");
         isAllBoltRemoved = true;
     }
 
@@ -165,6 +166,7 @@ public class DoingMechanicMono : MonoBehaviour
 
     internal bool IsAllBoltRemoved()
     {
+        //ServiceLocator.Instance.GetService<IDebugMediator>().LogL($"Removed all bolt {isAllBoltRemoved}");
         return isAllBoltRemoved;
     }
 

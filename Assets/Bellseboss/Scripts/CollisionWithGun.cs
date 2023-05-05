@@ -28,10 +28,10 @@ public class CollisionWithGun : MonoBehaviour
             float dotProduct = Vector3.Dot(other.transform.forward, transform.forward);
             // Check if the dot product is close to 1 (within a tolerance)
             var isAligned = Mathf.Abs(dotProduct) < tolerance;
-            ServiceLocator.Instance.GetService<IDebugMediator>().LogL(
+            /*ServiceLocator.Instance.GetService<IDebugMediator>().LogL(
                 $"Distance {Vector3.Distance(other.transform.position, transform.position)} - " + 
                 $"isAligned {isAligned} - " +
-                $"dotProduct {dotProduct}");
+                $"dotProduct {dotProduct}");*/
             if (Vector3.Distance(other.transform.position, transform.position) < 0.1f && isAligned)
             {
                 isPosition = true;   
@@ -48,7 +48,7 @@ public class CollisionWithGun : MonoBehaviour
         return isPosition;
     }
 
-    internal Tornillo GetTornillo()
+    public Tornillo GetTornillo()
     {
         return tornilloInTouch;
     }
